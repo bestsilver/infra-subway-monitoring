@@ -66,20 +66,4 @@ public class LineController {
     public ResponseEntity handleIllegalArgsException(DataIntegrityViolationException e) {
         return ResponseEntity.badRequest().build();
     }
-
-    @GetMapping("/lock-left")
-    public String findLockLeft() throws InterruptedException {
-        return "ok";
-    }
-
-    @GetMapping("/lock-right")
-    public String findLockRight() throws InterruptedException {
-        return "ok";
-    }
-
-    @GetMapping("/tan")
-    public String generateStreams() {
-        return "ok";
-    }
-
 }
