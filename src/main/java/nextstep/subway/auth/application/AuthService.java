@@ -6,6 +6,8 @@ import nextstep.subway.auth.dto.TokenResponse;
 import nextstep.subway.auth.infrastructure.JwtTokenProvider;
 import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthService {
     private MemberRepository memberRepository;
     private JwtTokenProvider jwtTokenProvider;
+
+    private static final Logger logger = LoggerFactory.getLogger("file");
+
 
     public AuthService(MemberRepository memberRepository, JwtTokenProvider jwtTokenProvider) {
         this.memberRepository = memberRepository;
@@ -25,6 +30,7 @@ public class AuthService {
         member.checkPassword(request.getPassword());
 
         String token = jwtTokenProvider.createToken(request.getEmail());
+        logger.info("login successfully : " + member.getEmail());
         return new TokenResponse(token);
     }
 
